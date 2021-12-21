@@ -2,11 +2,12 @@ package viewer
 
 import (
 	"fmt"
+	"strings"
+
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"strings"
-	"termdbms/database"
-	"termdbms/tuiutil"
+	"github.com/creepinson/termdbms/database"
+	"github.com/creepinson/termdbms/tuiutil"
 )
 
 type Command func(m *TuiModel) tea.Cmd
@@ -203,7 +204,7 @@ func init() {
 		if m.MouseData.Y-HeaderHeight+m.Viewport.YOffset < max-1 {
 			m.MouseData.Y++
 			ceiling := m.Viewport.Height + HeaderHeight - 1
-			tuiutil.Clamp(m.MouseData.Y, m.MouseData.Y+1, ceiling)
+			ceiling = tuiutil.Clamp(m.MouseData.Y, m.MouseData.Y+1, ceiling)
 			if m.MouseData.Y > ceiling {
 				ScrollDown(m)
 				m.MouseData.Y = ceiling

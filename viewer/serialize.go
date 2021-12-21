@@ -8,7 +8,8 @@ import (
 	"os"
 	"path"
 	"strings"
-	"termdbms/database"
+
+	"github.com/creepinson/termdbms/database"
 )
 
 var (

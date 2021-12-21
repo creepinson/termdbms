@@ -1,8 +1,9 @@
 package viewer
 
 import (
-	tea "github.com/charmbracelet/bubbletea"
 	"strings"
+
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 var (
@@ -128,26 +129,22 @@ func HandleFormatMovement(m *TuiModel, str string) (ret bool) {
 			ScrollDown(m)
 		}
 		ret = true
-		break
 	case "pgup":
 		for i := 0; i <
 			m.Viewport.Height && m.Viewport.YOffset > 0; i++ {
 			ScrollUp(m)
 		}
 		ret = true
-		break
 	case "home":
 		m.Viewport.YOffset = 0
 		m.Format.CursorX = 0
 		m.Format.CursorY = 0
 		ret = true
-		break
 	case "end":
 		m.Viewport.YOffset = len(m.Format.Text) - m.Viewport.Height
 		m.Format.CursorY = Min(m.Viewport.Height-FooterHeight, strings.Count(m.Data().EditTextBuffer, "\n"))
 		m.Format.CursorX = m.Format.RunningOffsets[len(m.Format.RunningOffsets)-1]
 		ret = true
-		break
 	case "right":
 		ret = true
 		m.Format.CursorX++
@@ -169,8 +166,6 @@ func HandleFormatMovement(m *TuiModel, str string) (ret bool) {
 		} else if m.Format.CursorY > maxY {
 			m.Format.CursorX = maxY
 		}
-
-		break
 	case "left":
 		ret = true
 		m.Format.CursorX--
@@ -193,8 +188,6 @@ func HandleFormatMovement(m *TuiModel, str string) (ret bool) {
 		} else if m.Format.CursorX < 0 {
 			m.Format.CursorX = 0
 		}
-
-		break
 	case "up":
 		ret = true
 		if m.Format.CursorY > 0 {
@@ -202,8 +195,6 @@ func HandleFormatMovement(m *TuiModel, str string) (ret bool) {
 		} else if m.Viewport.YOffset > 0 {
 			ScrollUp(m)
 		}
-
-		break
 	case "down":
 		ret = true
 		if m.Format.CursorY < m.Viewport.Height-FooterHeight && m.Format.CursorY < lines-1 {

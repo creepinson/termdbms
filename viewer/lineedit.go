@@ -8,9 +8,10 @@ import (
 	"math/rand"
 	"os"
 	"strings"
-	"termdbms/database"
-	"termdbms/tuiutil"
 	"time"
+
+	"github.com/creepinson/termdbms/database"
+	"github.com/creepinson/termdbms/tuiutil"
 )
 
 const (
@@ -48,7 +49,6 @@ func CreateEmptyBuffer(m *TuiModel, original *interface{}) {
 	m.Format.Text = GetFormattedTextBuffer(m)
 	m.SetViewSlices()
 	m.FormatInput.Model.SetCursor(0)
-	return
 }
 
 func CreatePopulatedBuffer(m *TuiModel, original *interface{}, str string) {
@@ -58,7 +58,6 @@ func CreatePopulatedBuffer(m *TuiModel, original *interface{}, str string) {
 	m.Format.Text = GetFormattedTextBuffer(m)
 	m.SetViewSlices()
 	m.FormatInput.Model.SetCursor(0)
-	return
 }
 
 func EditEnter(m *TuiModel) {
@@ -128,7 +127,7 @@ func EditEnter(m *TuiModel) {
 			return
 		} else if input == ":clip" {
 			ExitToDefaultView(m)
-			if len( m.ClipboardList.Items()) == 0 {
+			if len(m.ClipboardList.Items()) == 0 {
 				return
 			}
 			m.UI.ShowClipboard = true
@@ -186,14 +185,14 @@ func EditEnter(m *TuiModel) {
 				}
 				m.Clipboard = append(m.Clipboard, SQLSnippet{
 					Query: input,
-					Name: title,
+					Name:  title,
 				})
 				b, _ := json.Marshal(m.Clipboard)
 				snippetsFile := fmt.Sprintf("%s/%s", HiddenTmpDirectoryName, SQLSnippetsFile)
 				f, _ := os.OpenFile(snippetsFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0775)
 				f.Write(b)
 				f.Close()
-				m.WriteMessage(fmt.Sprintf("Wrote SQL snippet %s to %s. Total count is %d", title, snippetsFile, len(m.ClipboardList.Items()) + 1))
+				m.WriteMessage(fmt.Sprintf("Wrote SQL snippet %s to %s. Total count is %d", title, snippetsFile, len(m.ClipboardList.Items())+1))
 			}
 			m.TextInput.Model.SetValue("")
 		}
@@ -322,7 +321,6 @@ func populateUndo(m *TuiModel) (old string, new string) {
 		new = dst
 		m.DefaultTable.Database.CloseDatabaseReference()
 		m.DefaultTable.Database.SetDatabaseReference(dst)
-		break
 	default:
 		break
 	}

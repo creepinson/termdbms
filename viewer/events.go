@@ -3,13 +3,14 @@ package viewer
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"os"
-	"termdbms/list"
-	"termdbms/tuiutil"
-	"time"
+	"github.com/creepinson/termdbms/list"
+	"github.com/creepinson/termdbms/tuiutil"
 )
 
 // HandleMouseEvents does that
@@ -19,22 +20,18 @@ func HandleMouseEvents(m *TuiModel, msg *tea.MouseMsg) {
 		if !m.UI.EditModeEnabled {
 			ScrollDown(m)
 		}
-		break
 	case tea.MouseWheelUp:
 		if !m.UI.EditModeEnabled {
 			ScrollUp(m)
 		}
-		break
 	case tea.MouseLeft:
 		if !m.UI.EditModeEnabled && !m.UI.FormatModeEnabled && m.GetRow() < len(m.GetColumnData()) {
 			SelectOption(m)
 		}
-		break
 	default:
 		if !m.UI.RenderSelection && !m.UI.EditModeEnabled && !m.UI.FormatModeEnabled {
 			m.MouseData = tea.MouseEvent(*msg)
 		}
-		break
 	}
 }
 
@@ -89,7 +86,6 @@ func HandleClipboardEvents(m *TuiModel, str string, command *tea.Cmd, msg tea.Ms
 				CreatePopulatedBuffer(m, nil, i.Query)
 				m.UI.SQLEdit = true
 			}
-			break
 		default:
 			ExitToDefaultView(m)
 		}

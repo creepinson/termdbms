@@ -2,12 +2,13 @@ package viewer
 
 import (
 	"fmt"
+	"strings"
+	"time"
+
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"strings"
-	"termdbms/database"
-	"termdbms/tuiutil"
-	"time"
+	"github.com/creepinson/termdbms/database"
+	"github.com/creepinson/termdbms/tuiutil"
 )
 
 type TableAssembly func(m *TuiModel, s *string, c *chan bool)
@@ -107,7 +108,6 @@ func init() {
 			break
 		default:
 			undoRedoInfo = ""
-			break
 		}
 
 		gapSize := m.Viewport.Width - lipgloss.Width(footer) - lipgloss.Width(undoRedoInfo) - 2

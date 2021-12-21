@@ -2,8 +2,9 @@ package viewer
 
 import (
 	"errors"
+
 	"github.com/charmbracelet/lipgloss"
-	"termdbms/tuiutil"
+	"github.com/creepinson/termdbms/tuiutil"
 )
 
 var maxHeaders int

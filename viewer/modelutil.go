@@ -4,12 +4,13 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	tea "github.com/charmbracelet/bubbletea"
 	"os"
 	"strings"
-	"termdbms/database"
-	"termdbms/list"
-	"termdbms/tuiutil"
+
+	tea "github.com/charmbracelet/bubbletea"
+	"github.com/creepinson/termdbms/database"
+	"github.com/creepinson/termdbms/list"
+	"github.com/creepinson/termdbms/tuiutil"
 )
 
 func (m *TuiModel) WriteMessage(s string) {
@@ -39,9 +40,7 @@ func (m *TuiModel) CopyMap() (to map[string]interface{}) {
 			for i, colName := range columnNames {
 				val := columns[i].([]interface{})
 				buffer := make([]interface{}, len(val))
-				for k := range val {
-					buffer[k] = val[k]
-				}
+				buffer = append(buffer, val...)
 				columnValues[colName] = append(columnValues[colName], buffer)
 			}
 

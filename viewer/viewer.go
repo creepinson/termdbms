@@ -2,10 +2,11 @@ package viewer
 
 import (
 	"fmt"
+
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"termdbms/list"
-	"termdbms/tuiutil"
+	"github.com/creepinson/termdbms/list"
+	"github.com/creepinson/termdbms/tuiutil"
 )
 
 var (
@@ -76,17 +77,14 @@ func (m TuiModel) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := message.(type) {
 	case list.FilterMatchesMessage:
 		m.ClipboardList, command = m.ClipboardList.Update(msg)
-		break
 	case tea.MouseMsg:
 		HandleMouseEvents(&m, &msg)
 		m.SetViewSlices()
-		break
 	case tea.WindowSizeMsg:
 		event := HandleWindowSizeEvents(&m, &msg)
 		if event != nil {
 			commands = append(commands, event)
 		}
-		break
 	case tea.KeyMsg:
 		str := msg.String()
 		if m.UI.ShowClipboard {
@@ -121,8 +119,6 @@ func (m TuiModel) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 				MoveCursorWithinBounds(&m)
 			}
 		}
-
-		break
 	case error:
 		return m, nil
 	}
@@ -153,7 +149,7 @@ func (m TuiModel) View() string {
 	}(&content)
 
 	if m.UI.ShowClipboard {
-		<- done
+		<-done
 		return content
 	}
 
