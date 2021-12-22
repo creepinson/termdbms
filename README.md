@@ -48,7 +48,7 @@
 
 ## Installation
 
-    go install https://github.com/creepinson/termdbms@dev
+    go install github.com/creepinson/termdbms@dev
 
 ### How To Build
 
