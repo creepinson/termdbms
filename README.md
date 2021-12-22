@@ -46,6 +46,10 @@
 - MySQL/ PostgreSQL support
 - Line wrapping / horizontal scroll for format/SQL mode + revamped (faster format mode)
 
+## Installation
+
+    go install https://github.com/creepinson/termdbms@dev
+
 ### How To Build
 
 #### Linux
