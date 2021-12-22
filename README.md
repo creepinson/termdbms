@@ -2,20 +2,22 @@
 
 ## A TUI for viewing and editing databases, written in pure Go
 
-###### Database Support
+### Database Support
+
     SQLite
     CSV* (see note below)
+
 ### made with modernc.org/sqlite, charmbracelet/bubbletea, and charmbracelet/lipgloss
 
-#### Works with keyboard and mouse!
+#### Works with keyboard and mouse
 
 ![Keyboard Control](https://i.imgur.com/vmK0DVn.gif)
 
-#### Navigate tables with any number of columns!
+#### Navigate tables with any number of columns
 
 ![Columns and Tables](https://i.imgur.com/EqZRPqO.gif)
 
-#### Navigate tables with any number of rows!
+#### Navigate tables with any number of rows
 
 ![Lot of Rows](https://i.imgur.com/yo7DMaa.gif)
 
@@ -23,7 +25,7 @@
 
 ![Serialization](https://i.imgur.com/GhMcnid.gif)
 
-#### Query your database!
+#### Query your database
 
 ![querying](https://i.imgur.com/9FB3ETs.gif)
 
@@ -44,11 +46,9 @@
 - MySQL/ PostgreSQL support
 - Line wrapping / horizontal scroll for format/SQL mode + revamped (faster format mode)
 
-#### 
-<details>
-    <summary>How To Build</summary>
+### How To Build
 
-##### Linux
+#### Linux
 
     GOOS=linux GOARCH=amd64/386 go build
 
@@ -67,43 +67,53 @@
 </details>
 
 #### Terminal settings
+
 Whatever terminal emulator used should support ANSI escape sequences. If there is an option for 256 color mode, enable it. If not available, try running program in ascii mode (-a).
 
 #### Known Issues
- - Using termdbms over a serial connection works very poorly. This is due to ANSI sequences not being supported natively. Maybe putty/mobaxterm have settings to allow this?
- - The headers wig out sometimes in selection mode
- - Line wrapping is not yet implemented, so text in format mode should be less than the maximum number of columns available per line for best use. It's in the works!
- - Weird combinations of newlines + tabs can break stuff. Tabs at beginning of line and mid-line works in a stable manner.
 
-##### Help:
+- Using termdbms over a serial connection works very poorly. This is due to ANSI sequences not being supported natively. Maybe putty/mobaxterm have settings to allow this?
+- The headers wig out sometimes in selection mode
+- Line wrapping is not yet implemented, so text in format mode should be less than the maximum number of columns available per line for best use. It's in the works!
+- Weird combinations of newlines + tabs can break stuff. Tabs at beginning of line and mid-line works in a stable manner.
+
+##### Help
+
     -p / database/.csv path
     -d / specifies which database driver to use (sqlite/mysql)
     -a / enable ascii mode
     -h / prints this message
     -t / starts app with specific theme (default, nord, solarized)
-##### Controls:
+
+##### Controls
+
 ###### MOUSE
-	Scroll up + down to navigate table/text
-	Move cursor to select cells for full screen viewing
+
+    Scroll up + down to navigate table/text
+    Move cursor to select cells for full screen viewing
+
 ###### KEYBOARD
-	[WASD] to move around cells, and also move columns if close to edge
-	[ENTER] to select selected cell for full screen view
-	[UP/K and DOWN/J] to navigate schemas
+
+    [WASD] to move around cells, and also move columns if close to edge
+    [ENTER] to select selected cell for full screen view
+    [UP/K and DOWN/J] to navigate schemas
     [LEFT/H and RIGHT/L] to navigate columns if there are more than the screen allows.
         Also to control the cursor of the text editor in edit mode
     [BACKSPACE] to delete text before cursor in edit mode
     [M(scroll up) and N(scroll down)] to scroll manually
-	[Q or CTRL+C] to quit program
+    [Q or CTRL+C] to quit program
     [B] to toggle borders!
     [C] to expand column
-	[T] to cycle through themes!
+    [T] to cycle through themes!
     [P] in selection mode to write cell to file, or to print query results as CSV.
     [R] to redo actions, if applicable
     [U] to undo actions, if applicable
-	[ESC] to exit full screen view, or to enter edit mode
+    [ESC] to exit full screen view, or to enter edit mode
     [PGDOWN] to scroll down one views worth of rows
     [PGUP] to scroll up one views worth of rows
+
 ###### EDIT MODE (for quick, single line changes and commands)
+
     [ESC] to enter edit mode with no pre-loaded text input from selection
     When a cell is selected, press [:] to enter edit mode with selection pre-loaded
     The text field in the header will be populated with the selected cells text. Modifications can be made freely
@@ -119,7 +129,9 @@ Whatever terminal emulator used should support ANSI escape sequences. If there i
     [:clip] to open clipboard of SQL queries. [/] to filter, [ENTER] to select.
     [HOME] to set cursor to end of the text
     [END] to set cursor to the end of the text
+
 ###### FORMAT MODE (for editing lines of text)
+
     [ESC] to move between top control bar and format buffer
     [HOME] to set cursor to end of the text
     [END] to set cursor to the end of the text
@@ -127,11 +139,15 @@ Whatever terminal emulator used should support ANSI escape sequences. If there i
     [:w] to save changes and remain in format view
     [:s] to serialize changes, non-destructive (SQLite only)
     [:s!] to serialize changes, overwriting original file (SQLite only)
+
 ###### SQL MODE (for querying database)
+
     [ESC] to move between top control bar and text buffer
     [:q] to quit out of statement
     [:exec] to execute statement. Errors will be displayed in full screen view.
     [:stow <NAME>] to create a snippet for the clipboard with an optional name. A random number will be used if no name is specified.
+
 ###### QUERY MODE (specifically when viewing query results)
+
     [:d] to reset table data back to original view
     [:sql] to query original database again
